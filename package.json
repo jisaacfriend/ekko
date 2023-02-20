@@ -2,9 +2,19 @@
   "name": "ekko",
   "version": "0.0.1",
   "description": "An NPM package facilitating interaction with the Riot League of Legends API.",
-  "main": "index.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/es6/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/es6/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "buildes6": "cross-env BABEL_ENV=es6module babel ./src --out-dir ./dist/es6 --source-maps --copy-files",
+    "buildcjs": "cross-env BABEL_ENV=cjsmodule babel ./src --out-dir ./dist/cjs --source-maps --copy-files",
+    "build": "rm -rf dist/* && npm run buildes6 && npm run buildcjs",
+    "start": "npx babel src --watch --out-dir dist"
   },
   "repository": {
     "type": "git",
@@ -16,6 +26,7 @@
     "api",
     "league",
     "legends",
+    "lol",
     "champions",
     "match",
     "history",
@@ -26,5 +37,17 @@
   "bugs": {
     "url": "https://github.com/jisaacfriend/ekko/issues"
   },
-  "homepage": "https://github.com/jisaacfriend/ekko#readme"
+  "homepage": "https://github.com/jisaacfriend/ekko#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.14.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  },
+  "dependencies": {
+    "node-fetch": "^3.2.3"
+  }
 }

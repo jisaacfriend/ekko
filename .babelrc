@@ -1,0 +1,26 @@
+{
+  "env": {
+    "es6module": {
+      "presets": [
+        ["babel-preset-env", {
+          "targets": {
+            "node": "13.2.0"
+          },
+          "modules": true
+        }]
+      ],
+      "plugins": ["console-source"]
+    },
+    "cjsmodule": {
+      "presets": [
+        ["babel-preset-env", {
+          "targets": {
+            "node": "6.10"
+          },
+          "modules": false
+        }]
+      ],
+      "plugins": ["console-source"]
+    }
+  }
+}
